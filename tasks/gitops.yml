@@ -1,0 +1,31 @@
+---
+
+## Add play to check if argocd is already present
+
+- name: Install OpenShift gitops
+  ansible.builtin.command: helm upgrade --install openshift-gitops openshift-gitops -f policies/openshift-gitops/values.yaml
+
+- name: Verify gitops pods
+  ansible.builtin.command: oc get pods -n openshift-gitops
+  register: gitops_pods
+  failed_when:
+    - "'application' not in gitops_pods.stdout"
+    - "'applicationset' not in gitops_pods.stdout"
+    - "'dex' not in gitops_pods.stdout"
+    - "'redis' not in gitops_pods.stdout"
+    - "'repo' not in gitops_pods.stdout"
+    - "'server' not in gitops_pods.stdout"
+
+- name: Verify gitops operator pods
+  ansible.builtin.command: oc get pods -n openshift-gitops-operator
+  register: gitops_operator_pods
+  failed_when: 
+    - "'gitops-operator' not in gitops_operator_pods.stdout"
+
+- name: Verify gitops install
+  ansible.builtin.command: oc get argocd -A
+  register: gitops_install
+  failed_when: 
+    - "'openshift-gitops' not in gitops_install.stdout"
+
+## Possibly add try/catch/rescue to re-run the initial helm upgrade once if there is a fail

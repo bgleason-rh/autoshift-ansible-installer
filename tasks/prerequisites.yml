@@ -1,0 +1,21 @@
+---
+- name: Ensure helm is present
+  ansible.builtin.dnf:
+    name: helm
+    state: present
+
+
+- name: Check if oc is present
+  ansible.builtin.command: which oc
+  register: oc_check
+  failed_when: "'no oc in' in oc_check.stdout"
+
+
+- name: Check if there is a valid session
+  ansible.builtin.command: oc whoami
+  register: oc_whoami
+  failed_when: "'error' in oc_whoami.stdout"
+    
+- name: Clone the autoshiftv2 repo
+  ansible.builtin.command: git clone {{ autoshift_repo }}
+
