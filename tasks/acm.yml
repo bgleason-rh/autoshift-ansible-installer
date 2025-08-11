@@ -1,0 +1,10 @@
+---
+- name: Install Advanced Cluster Management
+  ansible.builtin.command: helm upgrade --install advanced-cluster-management advanced-cluster-management -f policies/advanced-cluster-management/values.yaml
+
+- name: Verify ACM install
+  ansible.builtin.command: oc get mch -A -w
+  register: acm_install
+  failed_when:
+    - "'Running' not in acm_install.stdout"
+

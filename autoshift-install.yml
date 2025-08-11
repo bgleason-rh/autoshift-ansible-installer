@@ -1,0 +1,21 @@
+---
+- name: Install AutoShift v2
+  hosts: localhost
+  gather_facts: false
+  pre_tasks:
+    - name: Ensure prerequisites are met
+      include_tasks: tasks/prerequisites.yml
+
+
+  tasks:
+    - name: Ensure gitops is installed
+      include_tasks: tasks/gitops.yml
+
+
+    - name: Ensure Advanced Cluster Management is installed
+      include_tasks: tasks/acm.yml
+
+
+    - name: Ensure AutoShift is installed
+      include_tasks: tasks/autoshift.yml
+
