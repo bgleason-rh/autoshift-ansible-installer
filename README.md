@@ -14,8 +14,11 @@ Built in support of the AutoShift project for OpenShift created by: Ben Carr - b
 
 ## Dependencies
 OpenShift cluster v4.18+
+
 helm installed locally or available via dnf.
+
 OpenShift CLI (oc) installed locally or available via dnf.
+
 Logged into the cluster you desire to act as a hub.
 
 
