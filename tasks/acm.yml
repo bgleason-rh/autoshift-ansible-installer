@@ -1,6 +1,6 @@
 ---
 - name: Install Advanced Cluster Management
-  ansible.builtin.command: helm upgrade --install advanced-cluster-management advanced-cluster-management -f policies/advanced-cluster-management/values.yaml
+  ansible.builtin.command: helm upgrade --install advanced-cluster-management {{ repo }}/advanced-cluster-management -f {{ repo }}/policies/advanced-cluster-management/values.yaml
 
 - name: Verify ACM install
   ansible.builtin.command: oc get mch -A -w

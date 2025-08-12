@@ -3,7 +3,7 @@
 ## Add play to check if argocd is already present
 
 - name: Install OpenShift gitops
-  ansible.builtin.command: helm upgrade --install openshift-gitops openshift-gitops -f policies/openshift-gitops/values.yaml
+  ansible.builtin.command: helm upgrade --install openshift-gitops {{ repo }}/openshift-gitops -f {{ repo }}/policies/openshift-gitops/values.yaml
 
 - name: Verify gitops pods
   ansible.builtin.command: oc get pods -n openshift-gitops

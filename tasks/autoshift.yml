@@ -2,5 +2,5 @@
 ## Play to update 'autoshift/values.yaml with desired feature flags and repo url as defined in Autoshift Cluster Labels Values Reference
 
 - name: Install AutoShift
-  ansible.builtin.command: helm template autoshift autoshift -f autoshift/values.hub.yaml | oc apply -f -
+  ansible.builtin.command: helm template autoshift {{ repo }}/autoshift -f {{ repo }}/autoshift/values.hub.yaml | oc apply -f -
 
