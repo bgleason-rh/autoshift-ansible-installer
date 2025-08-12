@@ -2,6 +2,8 @@
 - name: Install AutoShift v2
   hosts: localhost
   gather_facts: false
+  vars_files:
+   - vars/common.yml
   pre_tasks:
     - name: Ensure prerequisites are met
       include_tasks: tasks/prerequisites.yml
