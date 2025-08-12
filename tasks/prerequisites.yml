@@ -18,5 +18,5 @@
 
 
 - name: Clone the autoshiftv2 repo
-  ansible.builtin.command: git clone {{ autoshift_repo }}
+  ansible.builtin.command: git clone {{ repo_url }}
 
